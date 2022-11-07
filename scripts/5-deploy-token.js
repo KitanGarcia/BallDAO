@@ -5,18 +5,13 @@ import sdk from "./1-initialize-sdk.js";
   try {
     // Deploy a standard ERC-20 contract.
     const tokenAddress = await sdk.deployer.deployToken({
-      // What's your token's name? Ex. "Ethereum"
-      name: "NarutoDAO Governance Token",
-      // What's your token's symbol? Ex. "ETH"
-      symbol: "HOKAGE",
+      name: "BallDAO Governance Token",
+      symbol: "BALL",
       // This will be in case we want to sell our token,
       // because we don't, we set it to AddressZero again.
       primary_sale_recipient: AddressZero,
     });
-    console.log(
-      "✅ Successfully deployed token contract, address:",
-      tokenAddress,
-    );
+    console.log("Successfully deployed token contract, address:", tokenAddress);
   } catch (error) {
     console.error("failed to deploy token contract", error);
   }
