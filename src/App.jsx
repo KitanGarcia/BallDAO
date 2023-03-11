@@ -14,22 +14,21 @@ const App = () => {
   // Use the hooks thirdweb give us.
   const address = useAddress();
   console.log("👋 Address:", address);
-
-  // Initialize edition drop contract
-  const editionDropAddress = "0x00C879218ad295CCfb8a8057547795bafCF4D621";
+  // Initialize our Edition Drop contract
+  const editionDropAddress = "0xbD58bF8af420cD838E088189BC75a90b6311DaAE";
   const { contract: editionDrop } = useContract(
     editionDropAddress,
     "edition-drop"
   );
-
-  // Check if user has our NFT (all with tokenId 0)
-  const { data: nftBalance } = useNFTBalance(editionDrop, address, 0);
+  // Hook to check if the user has our NFT
+  const { data: nftBalance } = useNFTBalance(editionDrop, address, "0");
 
   const hasClaimedNFT = useMemo(() => {
     return nftBalance && nftBalance.gt(0);
   }, [nftBalance]);
 
-  // User hasn't connected their wallet
+  // This is the case where the user hasn't connected their wallet
+  // to your web app. Let them call connectWallet.
   if (!address) {
     return (
       <div className="landing">
@@ -41,21 +40,20 @@ const App = () => {
     );
   }
 
+  // Add this little piece!
   if (hasClaimedNFT) {
     return (
       <div className="member-page">
-        <h1>DAO Member Page</h1>
+        <h1>🍪DAO Member Page</h1>
         <p>Congratulations on being a member</p>
       </div>
     );
   }
 
-  // We have the user's address and therefore know they connected wallet
-  // Render mint NFT screen
-  // Claim 1 nft with tokenId 0
+  // Render mint nft screen.
   return (
     <div className="mint-nft">
-      <h1>Mint your free DAO Membership NFT</h1>
+      <h1>Mint your free 🍪DAO Membership NFT</h1>
       <div className="btn-hero">
         <Web3Button
           contractAddress={editionDropAddress}
@@ -64,7 +62,7 @@ const App = () => {
           }}
           onSuccess={() => {
             console.log(
-              `Successfully Minted! Check it out on OpenSea: https://testnets.opensea.io/assets/mumbai/${editionDrop.getAddress()}/0`
+              `🌊 Successfully Minted! Check it out on OpenSea: https://testnets.opensea.io/assets/${editionDrop.getAddress()}/0`
             );
           }}
           onError={(error) => {

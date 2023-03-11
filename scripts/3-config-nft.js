@@ -1,12 +1,12 @@
 import sdk from "./1-initialize-sdk.js";
 import { readFileSync } from "fs";
 
-const editionDrop = await sdk.getEditionDrop(
-  "0x00C879218ad295CCfb8a8057547795bafCF4D621"
-);
-
 (async () => {
   try {
+    const editionDrop = await sdk.getContract(
+      "0xbD58bF8af420cD838E088189BC75a90b6311DaAE",
+      "edition-drop"
+    );
     await editionDrop.createBatch([
       {
         name: "OG Streetball",

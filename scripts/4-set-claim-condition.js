@@ -4,7 +4,7 @@ import { MaxUint256 } from "@ethersproject/constants";
 (async () => {
   try {
     const editionDrop = await sdk.getContract(
-      "0x00C879218ad295CCfb8a8057547795bafCF4D621",
+      "0xbD58bF8af420cD838E088189BC75a90b6311DaAE",
       "edition-drop"
     );
     // We define our claim conditions, this is an array of objects because
@@ -25,12 +25,9 @@ import { MaxUint256 } from "@ethersproject/constants";
       },
     ];
 
-    // Interacts with our deployed contract on-chain
-    // 0 is the tokenId. Here all the NFTs are the same, so will have the same tokenId
     await editionDrop.claimConditions.set("0", claimConditions);
-    console.log("Sucessfully set claim condition!");
+    console.log("✅ Sucessfully set claim condition!");
   } catch (error) {
     console.error("Failed to set claim condition", error);
   }
 })();
-

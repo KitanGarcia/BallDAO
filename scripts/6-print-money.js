@@ -4,18 +4,18 @@ import sdk from "./1-initialize-sdk.js";
   try {
     // This is the address of our ERC-20 contract printed out in the step before.
     const token = await sdk.getContract(
-      "0x36aE2b29340d7006Bf5F5509e7B46fbeFAec9535",
+      "0x660893BFE642eE6C429EBe44873e2680c7AE2489",
       "token"
     );
-    // Set max supply to 1 million
+    // What's the max supply you want to set? 1,000,000 is a nice number!
     const amount = 1_000_000;
-    // Interact with deployed ERC-20 contract and mint the tokens!
+    // Interact with your deployed ERC-20 contract and mint the tokens!
     await token.mint(amount);
     const totalSupply = await token.totalSupply();
 
-    // Print out how many of our token are out there now!
+    // Print out how many of our token's are out there now!
     console.log(
-      "There now are",
+      "✅ There now is",
       totalSupply.displayValue,
       "$BALL in circulation"
     );
@@ -23,4 +23,3 @@ import sdk from "./1-initialize-sdk.js";
     console.error("Failed to print money", error);
   }
 })();
-
