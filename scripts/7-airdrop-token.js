@@ -16,7 +16,6 @@ const contractAddress = "0xbD58bF8af420cD838E088189BC75a90b6311DaAE"; // ERC1155
 const tokenId = "0";
 
 const getAddresses = async (erc) => {
-  const contract = await sdk.getContract(contractAddress);
   let addresses = [];
   if (erc === "erc1155") {
     addresses = (
@@ -43,13 +42,11 @@ const getAddresses = async (erc) => {
       "0x660893BFE642eE6C429EBe44873e2680c7AE2489",
       "token"
     );
-    console.log("GOT CONTRACTS");
-    console.log("GOT CONTRACTS");
 
     // Grab all the addresses of people who own our membership NFT, which has
     // a tokenId of 0.
     const walletAddresses = await getAddresses(erc);
-    console.log("ADDRESSES", walletAddresses);
+    console.log("Addresses", walletAddresses);
     /*
     const walletAddresses = await editionDrop.history.getAllClaimerAddresses(0);
     console.log("ADDRESSES", walletAddresses);
