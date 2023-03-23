@@ -2,14 +2,24 @@ import sdk from "./1-initialize-sdk.js";
 import { ethers } from "ethers";
 
 (async () => {
+  // Allow treasury to mint 420,000 token into the treasury
   try {
     // This is our governance contract.
-    const vote = await sdk.getContract("INSERT_VOTE_ADDRESS", "vote");
+    const vote = await sdk.getContract(
+      "0x2d73E2FBf6E5d5e5e49fb7D763b98c71df6CbB2a",
+      "vote"
+    );
     // This is our ERC-20 contract.
-    const token = await sdk.getContract("INSERT_TOKEN_ADDRESS", "token");
+    const token = await sdk.getContract(
+      "0x660893BFE642eE6C429EBe44873e2680c7AE2489",
+      "token"
+    );
     // Create proposal to mint 420,000 new token to the treasury.
     const amount = 420_000;
-    const description = "Should the DAO mint an additional " + amount + " tokens into the treasury?";
+    const description =
+      "Should the DAO mint an additional " +
+      amount +
+      " tokens into the treasury?";
     const executions = [
       {
         // Our token contract that actually executes the mint.
@@ -22,13 +32,11 @@ import { ethers } from "ethers";
         // acting as our treasury.
         // in this case, we need to use ethers.js to convert the amount
         // to the correct format. This is because the amount it requires is in wei.
-        transactionData: token.encoder.encode(
-          "mintTo", [
+        transactionData: token.encoder.encode("mintTo", [
           vote.getAddress(),
           ethers.utils.parseUnits(amount.toString(), 18),
-        ]
-        ),
-      }
+        ]),
+      },
     ];
 
     await vote.propose(description, executions);
@@ -39,15 +47,26 @@ import { ethers } from "ethers";
     process.exit(1);
   }
 
+  // Allow transfer of 69,000 tokens from treasury to our wallet
   try {
     // This is our governance contract.
-    const vote = await sdk.getContract("INSERT_VOTE_ADDRESS", "vote");
+    const vote = await sdk.getContract(
+      "0x2d73E2FBf6E5d5e5e49fb7D763b98c71df6CbB2a",
+      "vote"
+    );
     // This is our ERC-20 contract.
-    const token = await sdk.getContract("INSERT_TOKEN_ADDRESS", "token");
+    const token = await sdk.getContract(
+      "0x660893BFE642eE6C429EBe44873e2680c7AE2489",
+      "token"
+    );
     // Create proposal to transfer ourselves 6,900 tokens for being awesome.
     const amount = 6_900;
-    const description = "Should the DAO transfer " + amount + " tokens from the treasury to " +
-      process.env.WALLET_ADDRESS + " for being awesome?";
+    const description =
+      "Should the DAO transfer " +
+      amount +
+      " tokens from the treasury to " +
+      process.env.WALLET_ADDRESS +
+      " for being awesome?";
     const executions = [
       {
         // Again, we're sending ourselves 0 ETH. Just sending our own token.
@@ -73,3 +92,4 @@ import { ethers } from "ethers";
     console.error("failed to create second proposal", error);
   }
 })();
+
