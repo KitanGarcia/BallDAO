@@ -2,7 +2,10 @@ import sdk from "./1-initialize-sdk.js";
 
 (async () => {
   try {
-    const token = await sdk.getContract("INSERT_TOKEN_ADDRESS", "token");
+    const token = await sdk.getContract(
+      "0x660893BFE642eE6C429EBe44873e2680c7AE2489",
+      "token"
+    );
     // Log the current roles.
     const allRoles = await token.roles.getAll();
 
@@ -14,9 +17,11 @@ import sdk from "./1-initialize-sdk.js";
       "🎉 Roles after revoking ourselves",
       await token.roles.getAll()
     );
-    console.log("✅ Successfully revoked our superpowers from the ERC-20 contract");
-
+    console.log(
+      "✅ Successfully revoked our superpowers from the ERC-20 contract"
+    );
   } catch (error) {
     console.error("Failed to revoke ourselves from the DAO trasury", error);
   }
 })();
+
