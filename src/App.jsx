@@ -169,6 +169,18 @@ const App = () => {
     });
   }, [memberAddresses, memberTokenAmounts]);
 
+  if (address && network?.[0].data.chain.id !== ChainId.Mumbai) {
+    return (
+      <div className="unsupported-network">
+        <h2>Please connect to Mumbai</h2>
+        <p>
+          This dapp only works on the Mumbai network, please switch networks in
+          your connected wallet.
+        </p>
+      </div>
+    );
+  }
+
   // This is the case where the user hasn't connected their wallet
   // to your web app. Let them call connectWallet.
   if (!address) {
@@ -182,7 +194,6 @@ const App = () => {
     );
   }
 
-  // Add this little piece!
   if (hasClaimedNFT) {
     return (
       <div className="member-page">
